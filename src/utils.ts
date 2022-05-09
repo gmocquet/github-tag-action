@@ -59,7 +59,11 @@ export function getLatestTag(
   tagPrefix: string
 ) {
   return (
-    tags.find((tag) => !prerelease(tag.name.replace(prefixRegex, ''))) || {
+    tags.find(
+      (tag) =>
+        !prerelease(tag.name.replace(prefixRegex, '')) &&
+        tag.name.match(prefixRegex)
+    ) || {
       name: `${tagPrefix}0.0.0`,
       commit: {
         sha: 'HEAD',
